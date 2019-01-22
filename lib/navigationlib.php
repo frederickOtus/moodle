@@ -2598,7 +2598,9 @@ class global_navigation extends navigation_node {
         if ($coursetype == self::COURSE_CURRENT) {
             if ($coursenode = $this->rootnodes['mycourses']->find($course->id, self::TYPE_COURSE)) {
                 return $coursenode;
-            } else {
+            } else if(is_enrolled($coursecontext)){
+                $coursetype = self::COURSE_MY; 
+            }else {
                 $coursetype = self::COURSE_OTHER;
             }
         }
